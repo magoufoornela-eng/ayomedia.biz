@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ayomedia – Conception & Production de Supports de Communication</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange: #E8650A;
+    --orange-light: #FF8C3A;
+    --violet: #5B2D8E;
+    --violet-dark: #3A1A5C;
+    --noir: #111111;
+    --blanc: #FAFAF8;
+    --gris: #F2F0EC;
+    --text-muted: #7A7370;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanc);
+    color: var(--noir);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 48px;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(91,45,142,0.1);
+  }
+  .nav-logo {
+    font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem;
+    letter-spacing:-0.03em; color: var(--noir);
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a {
+    font-size:0.9rem; font-weight:500; color: var(--noir);
+    text-decoration:none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--violet); color:#fff;
+    border:none; padding:10px 24px; border-radius:100px;
+    font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.9rem;
+    cursor:pointer; transition: background 0.2s, transform 0.15s;
+    text-decoration:none;
+  }
+  .nav-cta:hover { background: var(--orange); transform:scale(1.03); }
+
+  /* ─── HERO ─── */
+  #accueil {
+    min-height: 100vh;
+    background: var(--noir);
+    display:flex; flex-direction:column; justify-content:center;
+    padding: 120px 48px 80px;
+    position:relative; overflow:hidden;
+  }
+  .hero-bg-shape {
+    position:absolute; top:-100px; right:-100px;
+    width:600px; height:600px; border-radius:50%;
+    background: radial-gradient(circle, rgba(232,101,10,0.25) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-bg-shape2 {
+    position:absolute; bottom:-150px; left:-80px;
+    width:500px; height:500px; border-radius:50%;
+    background: radial-gradient(circle, rgba(91,45,142,0.3) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-tag {
+    display:inline-block; background: rgba(232,101,10,0.15);
+    border:1px solid rgba(232,101,10,0.4); color: var(--orange-light);
+    padding:6px 18px; border-radius:100px; font-size:0.8rem;
+    font-weight:500; letter-spacing:0.08em; text-transform:uppercase;
+    margin-bottom:28px; width:fit-content;
+  }
+  .hero-title {
+    font-family:'Syne',sans-serif; font-weight:800;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height:1.0; letter-spacing:-0.03em; color:#fff;
+    max-width:800px; margin-bottom:24px;
+  }
+  .hero-title .accent { color: var(--orange); }
+  .hero-title .accent2 { color: #C89BF0; }
+  .hero-sub {
+    color: rgba(255,255,255,0.55); font-size:1.1rem; font-weight:300;
+    max-width:520px; line-height:1.7; margin-bottom:44px;
+  }
+  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; }
+  .btn-primary {
+    background: var(--orange); color:#fff; border:none;
+    padding:14px 32px; border-radius:100px; font-size:1rem;
+    font-weight:500; cursor:pointer; text-decoration:none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display:inline-block;
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,101,10,0.4); }
+  .btn-outline {
+    background:transparent; color:#fff;
+    border:1px solid rgba(255,255,255,0.3);
+    padding:14px 32px; border-radius:100px; font-size:1rem;
+    font-weight:500; cursor:pointer; text-decoration:none;
+    transition: border-color 0.2s, background 0.2s;
+    display:inline-block;
+  }
+  .btn-outline:hover { border-color:#fff; background:rgba(255,255,255,0.05); }
+  .hero-stats {
+    display:flex; gap:48px; margin-top:72px;
+    padding-top:40px; border-top:1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item .num {
+    font-family:'Syne',sans-serif; font-size:2rem; font-weight:800;
+    color: var(--orange);
+  }
+  .stat-item .label { font-size:0.82rem; color:rgba(255,255,255,0.45); margin-top:4px; }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 96px 48px; }
+  .section-tag {
+    font-size:0.75rem; font-weight:600; letter-spacing:0.12em;
+    text-transform:uppercase; color: var(--orange);
+    margin-bottom:12px;
+  }
+  .section-title {
+    font-family:'Syne',sans-serif; font-weight:800;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    letter-spacing:-0.02em; line-height:1.1; margin-bottom:16px;
+  }
+  .section-sub {
+    color: var(--text-muted); font-size:1rem; line-height:1.7;
+    max-width:480px; margin-bottom:56px;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--gris); }
+  .services-grid {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+    gap:20px; margin-top:16px;
+  }
+  .service-card {
+    background:#fff; border-radius:20px; padding:28px;
+    border:1px solid rgba(0,0,0,0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position:relative; overflow:hidden;
+  }
+  .service-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--violet), var(--orange));
+    opacity:0; transition: opacity 0.25s;
+  }
+  .service-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,0.1); }
+  .service-card:hover::before { opacity:1; }
+  .service-icon { font-size:2rem; margin-bottom:16px; }
+  .service-name {
+    font-family:'Syne',sans-serif; font-weight:700; font-size:1rem;
+    margin-bottom:8px;
+  }
+  .service-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.6; margin-bottom:16px; }
+  .service-price {
+    font-family:'Syne',sans-serif; font-weight:800;
+    font-size:1.05rem; color: var(--violet);
+  }
+  .service-price span { font-size:0.75rem; font-weight:400; color:var(--text-muted); }
+
+  /* ─── REALISATIONS ─── */
+  #realisations { background: var(--blanc); }
+  .gallery-grid {
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap:16px; margin-top:16px;
+  }
+  .gallery-item {
+    border-radius:16px; overflow:hidden; position:relative;
+    aspect-ratio:4/3; background:#e0ddd8;
+    cursor:pointer;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; aspect-ratio:16/7; }
+  .gallery-item:nth-child(5) { grid-column: span 2; aspect-ratio:16/7; }
+  .gallery-label {
+    position:absolute; bottom:0; left:0; right:0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color:#fff; padding:24px 16px 14px;
+    font-size:0.82rem; font-weight:500;
+    opacity:0; transition:opacity 0.25s;
+  }
+  .gallery-item:hover .gallery-label { opacity:1; }
+  .gallery-img {
+    width:100%; height:100%; object-fit:cover;
+    transition: transform 0.4s;
+  }
+  .gallery-item:hover .gallery-img { transform:scale(1.04); }
+  .gallery-placeholder {
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.5rem; background: var(--gris);
+  }
+
+  /* ─── ABOUT ─── */
+  #apropos {
+    background: var(--violet-dark);
+    color:#fff;
+  }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .about-text .section-tag { color:#C89BF0; }
+  .about-text .section-title { color:#fff; }
+  .about-text p { color:rgba(255,255,255,0.65); line-height:1.8; margin-bottom:16px; }
+  .about-features { display:flex; flex-direction:column; gap:16px; margin-top:32px; }
+  .feature-item { display:flex; align-items:flex-start; gap:14px; }
+  .feature-dot {
+    width:8px; height:8px; border-radius:50%;
+    background: var(--orange); margin-top:6px; flex-shrink:0;
+  }
+  .feature-text { font-size:0.95rem; color:rgba(255,255,255,0.75); line-height:1.6; }
+  .about-visual {
+    background: rgba(255,255,255,0.05);
+    border-radius:24px; padding:32px;
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  .about-visual .big-num {
+    font-family:'Syne',sans-serif; font-size:5rem; font-weight:800;
+    color: var(--orange); line-height:1;
+  }
+  .about-visual p { color:rgba(255,255,255,0.5); font-size:0.9rem; margin-top:8px; }
+  .about-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:32px; }
+  .about-stat { text-align:center; padding:20px; background:rgba(255,255,255,0.05); border-radius:16px; }
+  .about-stat .n { font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; color:#C89BF0; }
+  .about-stat .l { font-size:0.8rem; color:rgba(255,255,255,0.45); margin-top:4px; }
+
+  /* ─── CTA ─── */
+  #commander {
+    background: linear-gradient(135deg, var(--orange) 0%, #C44A06 100%);
+    text-align:center; color:#fff;
+  }
+  #commander .section-title { color:#fff; }
+  #commander .section-sub { color:rgba(255,255,255,0.75); max-width:520px; margin:0 auto 40px; }
+  .cta-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn-white {
+    background:#fff; color:var(--orange); border:none;
+    padding:14px 32px; border-radius:100px; font-size:1rem;
+    font-weight:600; cursor:pointer; text-decoration:none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display:inline-block;
+  }
+  .btn-white:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.2); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background:var(--noir); color:rgba(255,255,255,0.4);
+    text-align:center; padding:32px 48px;
+    font-size:0.85rem;
+  }
+  footer strong { color:#fff; }
+
+  /* ─── CHATBOT ─── */
+  #chat-btn {
+    position:fixed; bottom:28px; right:28px; z-index:999;
+    width:60px; height:60px; border-radius:50%;
+    background: linear-gradient(135deg, var(--violet), var(--orange));
+    border:none; cursor:pointer; color:#fff; font-size:1.5rem;
+    box-shadow: 0 4px 20px rgba(91,45,142,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display:flex; align-items:center; justify-content:center;
+  }
+  #chat-btn:hover { transform:scale(1.1); box-shadow: 0 8px 30px rgba(91,45,142,0.6); }
+
+  #chat-window {
+    position:fixed; bottom:104px; right:28px; z-index:998;
+    width:370px; height:520px;
+    background:#fff; border-radius:24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    display:flex; flex-direction:column;
+    overflow:hidden;
+    transform: scale(0.9) translateY(20px);
+    opacity:0; pointer-events:none;
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), opacity 0.25s;
+  }
+  #chat-window.open {
+    transform:scale(1) translateY(0);
+    opacity:1; pointer-events:all;
+  }
+  .chat-header {
+    background: linear-gradient(135deg, var(--violet-dark), var(--violet));
+    padding:18px 20px; display:flex; align-items:center; gap:12px;
+  }
+  .chat-avatar {
+    width:40px; height:40px; border-radius:50%;
+    background: var(--orange); display:flex; align-items:center;
+    justify-content:center; font-size:1.2rem; flex-shrink:0;
+  }
+  .chat-header-info h4 { color:#fff; font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem; }
+  .chat-header-info p { color:rgba(255,255,255,0.6); font-size:0.75rem; margin-top:2px; }
+  .online-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#4ade80; margin-right:5px; }
+
+  .chat-messages {
+    flex:1; overflow-y:auto; padding:20px 16px;
+    display:flex; flex-direction:column; gap:12px;
+    background: #F8F6F3;
+  }
+  .chat-messages::-webkit-scrollbar { width:4px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius:4px; }
+
+  .msg { max-width:82%; animation: msgIn 0.25s ease; }
+  @keyframes msgIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+  .msg.bot { align-self:flex-start; }
+  .msg.user { align-self:flex-end; }
+
+  .msg-bubble {
+    padding:10px 14px; border-radius:16px; font-size:0.875rem; line-height:1.55;
+  }
+  .msg.bot .msg-bubble {
+    background:#fff; color:var(--noir);
+    border-bottom-left-radius:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.08);
+  }
+  .msg.user .msg-bubble {
+    background: var(--violet); color:#fff;
+    border-bottom-right-radius:4px;
+  }
+  .msg-time { font-size:0.68rem; color:#bbb; margin-top:4px; padding:0 4px; }
+  .msg.user .msg-time { text-align:right; }
+
+  .typing-indicator { display:flex; gap:5px; padding:12px 14px; }
+  .typing-indicator span {
+    width:7px; height:7px; border-radius:50%;
+    background:#ccc; animation: bounce 1.2s infinite;
+  }
+  .typing-indicator span:nth-child(2) { animation-delay:0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay:0.4s; }
+  @keyframes bounce {
+    0%,60%,100% { transform:translateY(0); }
+    30% { transform:translateY(-6px); }
+  }
+
+  .chat-suggestions {
+    display:flex; flex-wrap:wrap; gap:8px; padding:12px 16px;
+    background:#fff; border-top:1px solid #f0ede9;
+  }
+  .suggestion-btn {
+    background: rgba(91,45,142,0.08); color: var(--violet);
+    border:1px solid rgba(91,45,142,0.2); border-radius:100px;
+    padding:6px 14px; font-size:0.78rem; cursor:pointer;
+    transition:background 0.2s; white-space:nowrap;
+  }
+  .suggestion-btn:hover { background: rgba(91,45,142,0.15); }
+
+  .chat-input-row {
+    display:flex; gap:10px; padding:14px 16px;
+    background:#fff; border-top:1px solid #f0ede9;
+  }
+  #chat-input {
+    flex:1; border:1px solid #e8e4df; border-radius:100px;
+    padding:10px 16px; font-size:0.875rem; font-family:'DM Sans',sans-serif;
+    outline:none; transition:border-color 0.2s;
+  }
+  #chat-input:focus { border-color: var(--violet); }
+  #chat-send {
+    width:38px; height:38px; border-radius:50%;
+    background: var(--violet); border:none; cursor:pointer; color:#fff;
+    font-size:1rem; transition:background 0.2s;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  #chat-send:hover { background: var(--orange); }
+
+  /* ─── WHATSAPP LINK ─── */
+  .wa-btn {
+    display:inline-flex; align-items:center; gap:10px;
+    background:#25D366; color:#fff; border-radius:100px;
+    padding:12px 24px; text-decoration:none; font-weight:500;
+    font-size:0.9rem; margin-top:12px; transition:transform 0.2s;
+  }
+  .wa-btn:hover { transform:translateY(-2px); }
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:768px){
+    nav { padding:16px 20px; }
+    .nav-links { display:none; }
+    section { padding:64px 20px; }
+    #accueil { padding:100px 20px 60px; }
+    .hero-stats { gap:24px; flex-wrap:wrap; }
+    .about-grid { grid-template-columns:1fr; }
+    .gallery-grid { grid-template-columns:1fr 1fr; }
+    .gallery-item:nth-child(1), .gallery-item:nth-child(5) { grid-column:span 2; }
+    #chat-window { width:calc(100vw - 32px); right:16px; bottom:96px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AYO<span>MEDIA</span></div>
+  <ul class="nav-links">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#apropos">À propos</a></li>
+  </ul>
+  <a href="https://wa.me/237697999600" target="_blank" class="nav-cta">Commander →</a>
+</nav>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-shape2"></div>
+  <div class="hero-tag">🎨 Design · Print · Marque · Communication</div>
+  <h1 class="hero-title">
+    Donnez de la <span class="accent">visibilité</span><br/>
+    à votre <span class="accent2">marque</span>
+  </h1>
+  <p class="hero-sub">Flyers, bâches, gadgets personnalisés, emballages… Ayomedia conçoit et produit tous vos supports de communication avec qualité et rapidité.</p>
+  <div class="hero-btns">
+    <a href="#services" class="btn-primary">Voir nos services</a>
+    <a href="#realisations" class="btn-outline">Nos réalisations</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="num">500+</div>
+      <div class="label">Clients satisfaits</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">15+</div>
+      <div class="label">Types de supports</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">48h</div>
+      <div class="label">Délai moyen</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag">Nos services & tarifs</div>
+  <h2 class="section-title">Ce que nous concevons<br/>pour vous</h2>
+  <p class="section-sub">Des prix accessibles pour des supports professionnels de haute qualité.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🖨️</div>
+      <div class="service-name">Flyer visuel A5</div>
+      <div class="service-desc">Conception + impression de flyers publicitaires professionnels.</div>
+      <div class="service-price">100 FCFA <span>/ lot de 100 pièces</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏳️</div>
+      <div class="service-name">Banderole</div>
+      <div class="service-desc">Banderole grand format pour événements et façades.</div>
+      <div class="service-price">9 000 FCFA <span>/ 3 mètres</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📦</div>
+      <div class="service-name">Carton (savon / thé)</div>
+      <div class="service-desc">Packaging personnalisé pour vos produits de consommation.</div>
+      <div class="service-price">300 FCFA <span>/ lot de 100</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💳</div>
+      <div class="service-name">Carte de visite</div>
+      <div class="service-desc">Cartes professionnelles premium, finition mate ou brillante.</div>
+      <div class="service-price">10 000 FCFA <span>/ lot de 100</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <div class="service-name">Bâche publicitaire</div>
+      <div class="service-desc">Impression haute résolution sur bâche soleil ou intérieur.</div>
+      <div class="service-price">3 000 FCFA <span>/ mètre linéaire</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏷️</div>
+      <div class="service-name">Étiquette produit</div>
+      <div class="service-desc">Étiquettes avec découpe personnalisée, imprimées en rouleau.</div>
+      <div class="service-price">3 500 FCFA <span>/ mètre avec découpe</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📌</div>
+      <div class="service-name">Pins personnalisés</div>
+      <div class="service-desc">Badges pins à épingles pour événements et promotions.</div>
+      <div class="service-price">400 FCFA <span>/ lot de 50 pièces</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧴</div>
+      <div class="service-name">Gourde personnalisée</div>
+      <div class="service-desc">Gourde gravée ou imprimée avec votre logo ou message.</div>
+      <div class="service-price">10 000 FCFA <span>/ pièce</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔑</div>
+      <div class="service-name">Porte-clés</div>
+      <div class="service-desc">Porte-clés personnalisés, idéals comme goodies ou cadeaux.</div>
+      <div class="service-price">300 FCFA <span>/ lot de 100</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛍️</div>
+      <div class="service-name">Shopping bag</div>
+      <div class="service-desc">Sac shopping personnalisé une face avec votre identité visuelle.</div>
+      <div class="service-price">1 500 FCFA <span>/ pièce</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛒</div>
+      <div class="service-name">Sac plastique</div>
+      <div class="service-desc">Sacs plastiques personnalisés pour commerces et boutiques.</div>
+      <div class="service-price">30 000 FCFA <span>/ lot de 200</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📔</div>
+      <div class="service-name">Agenda en bois</div>
+      <div class="service-desc">Agenda gravé avec couverture bois personnalisée.</div>
+      <div class="service-price">20 000 FCFA <span>/ pièce</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🖊️</div>
+      <div class="service-name">Stylo personnalisé</div>
+      <div class="service-desc">Stylos publicitaires gravés à votre nom ou logo.</div>
+      <div class="service-price">1 000 FCFA <span>/ pièce</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🖼️</div>
+      <div class="service-name">Cadre photo</div>
+      <div class="service-desc">Cadre photo personnalisé avec LED, idéal pour offrir.</div>
+      <div class="service-price">10 000 FCFA <span>/ pièce</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏛️</div>
+      <div class="service-name">Roll-up</div>
+      <div class="service-desc">Petite base (40 000F) ou grande base (50 000F). Impression incluse.</div>
+      <div class="service-price">À partir de 40 000 FCFA</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✏️</div>
+      <div class="service-name">Conception visuelle</div>
+      <div class="service-desc">Création graphique de votre support par nos designers.</div>
+      <div class="service-price">À partir de 5 000 FCFA</div>
+    </div>
+  </div>
+</section>
+
+<!-- RÉALISATIONS -->
+<section id="realisations">
+  <div class="section-tag">Portfolio</div>
+  <h2 class="section-title">Nos réalisations</h2>
+  <p class="section-sub">Un aperçu de quelques projets réalisés pour nos clients.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80" alt="Flyers professionnels"/>
+      <div class="gallery-label">✦ Flyers & Supports imprimés</div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&q=80" alt="Étiquettes produits"/>
+      <div class="gallery-label">✦ Étiquettes produits</div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=80" alt="Shopping bags"/>
+      <div class="gallery-label">✦ Shopping bags personnalisés</div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=400&q=80" alt="Gadgets personnalisés"/>
+      <div class="gallery-label">✦ Gadgets & Goodies</div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1541516160071-4bb0c5af65ba?w=800&q=80" alt="Roll-up banderole"/>
+      <div class="gallery-label">✦ Roll-up & Banderoles</div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&q=80" alt="Gourdes personnalisées"/>
+      <div class="gallery-label">✦ Gourdes personnalisées</div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-tag">À propos</div>
+      <h2 class="section-title">Votre partenaire communication au Cameroun</h2>
+      <p>Ayomedia est une agence de conception et production de supports de communication basée au Cameroun. Nous aidons les entreprises à construire une image forte et cohérente.</p>
+      <p>De la conception graphique à l'impression finale, nous maîtrisons toute la chaîne de production pour vous offrir des résultats rapides et de qualité.</p>
+      <div class="about-features">
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Conception graphique professionnelle incluse dès 5 000 FCFA</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Production rapide — livraison en 24 à 72h selon le support</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Commande et paiement simplifiés via WhatsApp</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Tarifs compétitifs adaptés aux PME et entrepreneurs</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="big-num">5+</div>
+      <p>années d'expérience dans la communication visuelle</p>
+      <div class="about-grid2">
+        <div class="about-stat">
+          <div class="n">500+</div>
+          <div class="l">Clients</div>
+        </div>
+        <div class="about-stat">
+          <div class="n">15+</div>
+          <div class="l">Supports</div>
+        </div>
+        <div class="about-stat">
+          <div class="n">48h</div>
+          <div class="l">Délai moyen</div>
+        </div>
+        <div class="about-stat">
+          <div class="n">100%</div>
+          <div class="l">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="commander">
+  <div class="section-tag" style="color:rgba(255,255,255,0.7)">Passez commande</div>
+  <h2 class="section-title">Prêt à booster<br/>votre visibilité ?</h2>
+  <p class="section-sub">Contactez-nous sur WhatsApp pour valider votre commande et effectuer votre paiement en toute simplicité.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/237697999600" target="_blank" class="btn-white">💬 Commander sur WhatsApp</a>
+    <a href="https://wa.me/c/237697999600" target="_blank" class="btn-outline">📋 Voir le catalogue complet</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Ayomedia</strong> · www.ayomedia.biz · +237 697 999 600</p>
+  <p style="margin-top:8px;">© 2025 Ayomedia · Conception & Production de Supports de Communication · Cameroun</p>
+</footer>
+
+<!-- CHAT BUTTON -->
+<button id="chat-btn" onclick="toggleChat()" title="Discuter avec nous">💬</button>
+
+<!-- CHAT WINDOW -->
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">🎨</div>
+    <div class="chat-header-info">
+      <h4>Assistant Ayomedia</h4>
+      <p><span class="online-dot"></span>En ligne · Répond instantanément</p>
+    </div>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-suggestions" id="suggestions">
+    <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">🖨️ Flyers</button>
+    <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">🏳️ Banderole</button>
+    <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">💳 Carte de visite</button>
+    <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">🎁 Gadgets</button>
+    <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">📋 Tous les prix</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" placeholder="Posez votre question…" onkeydown="if(event.key==='Enter') sendMessage()"/>
+    <button id="chat-send" onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<script>
+const CATALOGUE = `
+Tu es l'assistant commercial d'Ayomedia, une agence de conception et production de supports de communication au Cameroun.
+Réponds toujours en français, de façon chaleureuse, concise et professionnelle.
+Aide les clients à choisir le bon produit et indique le prix.
+À la fin, invite toujours le client à finaliser sa commande sur WhatsApp : https://wa.me/237697999600
+
+CATALOGUE COMPLET AYOMEDIA :
+- Flyer visuel A5 : 100 FCFA pour 100 flyers (conception incluse ou à partir de 5000 FCFA si conception seule)
+- Banderole : 9 000 FCFA pour une banderole de 3 mètres
+- Carton (savon/thé/packaging) : 300 FCFA pour 100 cartons
+- Carte de visite : 10 000 FCFA pour 100 cartes
+- Bâche publicitaire : 3 000 FCFA le mètre linéaire
+- Étiquette produit : 3 500 FCFA le mètre avec découpe
+- Pins personnalisés : 400 FCFA pour 50 pièces
+- Gourde personnalisée : 10 000 FCFA la pièce
+- Porte-clés : 300 FCFA pour 100 pièces
+- Shopping bag (sac papier personnalisé) : 1 500 FCFA la pièce (une face)
+- Sac plastique personnalisé : 30 000 FCFA pour 200 plastiques
+- Agenda en bois personnalisé : 20 000 FCFA la pièce
+- Stylo personnalisé : 1 000 FCFA la pièce
+- Cadre photo personnalisé (avec LED) : 10 000 FCFA la pièce
+- Roll-up petite base : 40 000 FCFA (impression incluse)
+- Roll-up grande base : 50 000 FCFA (impression incluse)
+- Conception visuelle / design graphique seul : à partir de 5 000 FCFA
+
+Pour commander : WhatsApp +237 697 999 600 ou https://wa.me/237697999600
+Catalogue WhatsApp : https://wa.me/c/237697999600
+`;
+
+let history = [];
+let chatOpen = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-window').classList.toggle('open', chatOpen);
+  if(chatOpen && history.length === 0) initChat();
+}
+
+function initChat() {
+  addBotMessage("Bonjour ! 👋 Je suis l'assistant Ayomedia. Comment puis-je vous aider aujourd'hui ?\n\nJe peux vous renseigner sur nos prix, vous aider à choisir le bon support et vous orienter vers WhatsApp pour passer commande. 😊");
+}
+
+function addBotMessage(text) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  const now = new Date().toLocaleTimeString('fr', {hour:'2-digit', minute:'2-digit'});
+
+  // Convert WhatsApp links to clickable buttons
+  let html = text.replace(/(https:\/\/wa\.me\/[^\s]+)/g,
+    '<br/><a href="$1" target="_blank" class="wa-btn">💬 Commander sur WhatsApp</a>');
+  html = html.replace(/\n/g, '<br/>');
+
+  div.innerHTML = <div class="msg-bubble">${html}</div><div class="msg-time">${now}</div>;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addUserMessage(text) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg user';
+  const now = new Date().toLocaleTimeString('fr', {hour:'2-digit', minute:'2-digit'});
+  div.innerHTML = <div class="msg-bubble">${text}</div><div class="msg-time">${now}</div>;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typing';
+  div.innerHTML = <div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if(t) t.remove();
+}
+
+function sendSuggestion(text) {
+  document.getElementById('chat-input').value = text;
+  sendMessage();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+
+  addUserMessage(text);
+  document.getElementById('suggestions').style.display = 'none';
+  history.push({role:'user', content: text});
+
+  showTyping();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system: CATALOGUE,
+        messages: history
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+    const reply = data.content?.[0]?.text || "Désolé, une erreur s'est produite. Contactez-nous directement sur WhatsApp : https://wa.me/237697999600";
+    history.push({role:'assistant', content: reply});
+    addBotMessage(reply);
+  } catch(e) {
+    removeTyping();
+    addBotMessage("Une erreur s'est produite. Contactez-nous directement sur WhatsApp : https://wa.me/237697999600");
+  }
+}
+<6OO876/script>
+</body>
+</html>
